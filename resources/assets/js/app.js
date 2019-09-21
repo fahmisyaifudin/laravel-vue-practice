@@ -15,8 +15,42 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('navbar', require('./components/Navbar.vue'));
+
+
+
+/**
+ * Vue Router
+ *
+ * @link http://router.vuejs.org/en/installation.html
+ */
+import VueRouter from 'vue-router';
+import VuePageTransition from 'vue-page-transition';
+
+Vue.use(VuePageTransition);
+Vue.use(VueRouter);
+
+// define routes for users
+const routes = [
+	{
+		path: '/',
+		name: 'artcileIndex',
+		component: require('./components/Articles.vue')
+	},
+	{
+		path: '/create',
+		name: 'articleCreate',
+		component: require('./components/CreateArticle.vue') 
+    },
+    {
+		path: '/edit/:id',
+		name: 'articleEdit',
+		component: require('./components/EditArticle.vue') 
+	},
+]
+
+const router = new VueRouter({ routes });
 
 const app = new Vue({
-    el: '#app'
-});
+    router
+  }).$mount('#app')
